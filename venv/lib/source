@@ -1,0 +1,32 @@
+import praw
+
+reddit = praw.Reddit(
+    client_id="G8lK_moCNgQWLg",
+    client_secret="Xd8D4ZWKrs6ifiYk8omLs8ycYY3ckg",
+    user_agent="save_saver",
+    password="Penelopep1",
+    username="mrtimmiller",
+
+)
+
+id_list_one = []
+id_list_two = []
+
+
+
+def get_title_one():
+    for submission in reddit.subreddit("millers_bot_tests").new(limit=1):
+        id_list_one.append(submission.title)
+def get_title_two():
+    for submission in reddit.user.me().saved(limit=1):
+        id_list_two.append(submission.title)
+
+get_title_one()
+
+for submission in reddit.user.me().saved(limit=10):
+    if not submission.is_self and submission.title in id_list_one:
+        print("yes")
+# for submission in reddit.user.me().saved(limit=1):
+#     if not submission.is_self:
+#         reddit.subreddit("millers_bot_tests").submit(submission.title, url=submission.url)
+
